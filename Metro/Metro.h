@@ -2,22 +2,27 @@
 
 class Metro
 {
-private: int length_of_train;
-private: int head_x;
-private: int path;
-private: double speed;
+public: int length_of_train;
+public: int head_x;
+public: int path;
+public: double speed;
 public: void move() {
 	head_x = head_x + speed;
 }
 public: int is_it_train(int x, int y) {
-	for (int i = 0; i < length_of_train; i++) {
-		int juice = head_x - i;
-		if (x == juice && y == path) {
-			return 1;
+	int dsc = head_x - x;
+	int sfs = head_x - length_of_train;
+	if (x == head_x && y == path) {
+		return 1;
+	}else if(dsc >= 1){
+		if (dsc <= sfs) {
+			if (y == path) {
+				return 1;
+			}
 		}
-		else {
-			return 0;
-		}
+	}
+	else {
+		return 0;
 	}
 }
 public: void pausing() {

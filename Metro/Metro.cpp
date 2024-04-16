@@ -7,12 +7,27 @@ using namespace std;
 #include <thread>
 #include <chrono>
 
+const int consolex = 120;
+const int consoley = 30;
 
 int main()
 {
 	Metro Mtr1;
-	while (true) {
-		for(int cmdx;cmdx < )
+	Mtr1.head_x = 10;
+	Mtr1.length_of_train = 7;
+	Mtr1.path = 15;
+	for (int cmdy = 0; cmdy < consoley; cmdy++) {
+		for (int cmdx = 0; cmdx < consolex; cmdx++) {
+			int trfl = Mtr1.is_it_train(cmdx, cmdy);
+			if (trfl == 1) {
+				cout << "@";
+			}
+			else if (trfl != 1 && cmdy == Mtr1.path) {
+				cout << "=";
+			}
+			else cout << " ";
+		}
+		cout << endl;
 	}
 }
 
