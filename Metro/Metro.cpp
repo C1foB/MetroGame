@@ -6,28 +6,40 @@ using namespace std;
 #include "Metro.h"
 #include <thread>
 #include <chrono>
+#include <Windows.h>
 
 const int consolex = 120;
-const int consoley = 30;
+const int consoley = 29;
 
 int main()
 {
+	int w;
 	Metro Mtr1;
-	Mtr1.head_x = 10;
-	Mtr1.length_of_train = 7;
-	Mtr1.path = 15;
-	for (int cmdy = 0; cmdy < consoley; cmdy++) {
-		for (int cmdx = 0; cmdx < consolex; cmdx++) {
-			int trfl = Mtr1.is_it_train(cmdx, cmdy);
-			if (trfl == 1) {
-				cout << "@";
+	Mtr1.head_x = 8;
+	cout << "Enter the length of train >>";
+	cin >> Mtr1.length_of_train;
+	Mtr1.length_of_train += 1;
+	cout << "Enter number of the path for train>>";
+	cin >> Mtr1.path;
+	Mtr1.path -= 1;
+	system("cls");
+	while(true){
+		system("cls");
+		for (int cmdy = 0; cmdy < consoley; cmdy++) {
+			for (int cmdx = 0; cmdx < consolex; cmdx++) {
+				int trfl = Mtr1.is_it_train(cmdx, cmdy);
+				if (trfl == 1) {
+					cout << "@";
+				}
+				else if (trfl != 1 && cmdy == Mtr1.path) {
+					cout << "=";
+				}
+				else cout << " ";
 			}
-			else if (trfl != 1 && cmdy == Mtr1.path) {
-				cout << "=";
-			}
-			else cout << " ";
+			cout << endl;
 		}
-		cout << endl;
+		Mtr1.head_x += 1;
+		Sleep(300);
 	}
 }
 

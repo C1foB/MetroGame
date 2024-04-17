@@ -10,15 +10,13 @@ public: void move() {
 	head_x = head_x + speed;
 }
 public: int is_it_train(int x, int y) {
-	int dsc = head_x - x;
-	int sfs = head_x - length_of_train;
-	if (x == head_x && y == path) {
-		return 1;
-	}else if(dsc >= 1){
-		if (dsc <= sfs) {
-			if (y == path) {
-				return 1;
-			}
+	int dsa = head_x - length_of_train;
+	if (x < head_x && x>dsa) {
+		if (y == path) {
+			return 1;
+		}
+		else {
+			return 0;
 		}
 	}
 	else {
