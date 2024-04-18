@@ -15,6 +15,7 @@ int main()
 {
 	int w;
 	Metro Mtr1;
+	Mtr1.speed = 1;
 	Mtr1.head_x = 8;
 	cout << "Enter the length of train >>";
 	cin >> Mtr1.length_of_train;
@@ -34,11 +35,11 @@ int main()
 				else if (trfl != 1 && cmdy == Mtr1.path) {
 					cout << "=";
 				}
-				else cout << " ";
+				else { cout << " ";}
 			}
 			cout << endl;
 		}
-		Mtr1.head_x += 1;
+		Mtr1.move();
 		Sleep(300);
 	}
 }
