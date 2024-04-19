@@ -40,6 +40,14 @@ int main()
 			cout << endl;
 		}
 		Mtr1.move();
+		if (Mtr1.head_x < 2)
+			Mtr1.head_x = 120;
+		if (GetKeyState('P'))
+			Mtr1.speed = 1;
+		if (GetKeyState('S'))
+			Mtr1.speed = 0;
+		if (Mtr1.head_x > 127)
+			Mtr1.head_x = 1;
 		Sleep(300);
 	}
 }
