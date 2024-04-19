@@ -38,9 +38,6 @@ public: void starttrain() {
 	speed = speed + (1 * 0.5);
 }
 
-public: void isStation() {
-	for(int wasd = 0;wasd <= station)
-}
 public: void inorout() {
 	int dewfj;
 	dewfj = rand() % people;

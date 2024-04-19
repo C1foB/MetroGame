@@ -39,15 +39,23 @@ int main()
 			}
 			cout << endl;
 		}
-		Mtr1.move();
-		if (Mtr1.head_x < 2)
-			Mtr1.head_x = 120;
-		if (GetKeyState('P'))
-			Mtr1.speed = 1;
-		if (GetKeyState('S'))
+		
+		
+		if (GetKeyState('S')) {
 			Mtr1.speed = 0;
+		}
+		else if (GetKeyState('P')) {
+			Mtr1.speed = 1;
+		}
+		else {
+			w = 1;
+		}
 		if (Mtr1.head_x > 127)
 			Mtr1.head_x = 1;
+		else if (Mtr1.head_x < 2)
+			Mtr1.head_x = 120;
+		else w = 0;
+		Mtr1.move();
 		Sleep(300);
 	}
 }
