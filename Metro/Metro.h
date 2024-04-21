@@ -26,23 +26,24 @@ public: int is_it_train(int x, int y) {
 		return 0;
 	}
 }
-public: void pausing() {
-	speed = speed - ((speed / 100) * 93);
-}
-public: void SetHeadX_SetLengthOfTrain_SetPath(int setheadx,int setlengthoftrain,int setpath){
-	head_x = setheadx;
-	length_of_train = setlengthoftrain;
-	path = setpath;
-}
-public: void starttrain() {
-	speed = speed + (1 * 0.5);
+
+public:int isStation() {
+	int null;
+	for (int u = 0; u <= station; u++) {
+		if (stations[u] == head_x) {
+			return 1;
+		}
+		else {
+			null = 0;
+		}
+	}
 }
 
 public: void inorout() {
 	int dewfj;
 	dewfj = rand() % people;
 	people = people - dewfj;
-	people = people + rand();
+	people = people + (rand()% 70);
 }
 };
 

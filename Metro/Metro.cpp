@@ -9,12 +9,19 @@ using namespace std;
 #include <Windows.h>
 
 const int consolex = 120;
-const int consoley = 29;
+const int consoley = 28;
 
 int main()
 {
+	setlocale(LC_ALL,"Russian");
 	int w;
 	Metro Mtr1;
+	cout << "Enter nuber of stations" << endl;
+	cin >> Mtr1.station;
+	for (int g = 0; g <= Mtr1.station; g++) {
+		cout << "Введите позицию станции номер" << g << endl;
+		cin >> Mtr1.stations[g];
+	}
 	Mtr1.speed = 1;
 	Mtr1.head_x = 8;
 	cout << "Enter the length of train >>";
@@ -24,8 +31,10 @@ int main()
 	cin >> Mtr1.path;
 	Mtr1.path -= 1;
 	system("cls");
+	Mtr1.people = 104;
 	while(true){
 		system("cls");
+		cout << Mtr1.people << " чел." << endl;
 		for (int cmdy = 0; cmdy < consoley; cmdy++) {
 			for (int cmdx = 0; cmdx < consolex; cmdx++) {
 				int trfl = Mtr1.is_it_train(cmdx, cmdy);
@@ -39,6 +48,7 @@ int main()
 			}
 			cout << endl;
 		}
+		
 		
 		
 		if (GetKeyState('S')) {
@@ -56,7 +66,10 @@ int main()
 			Mtr1.head_x = 120;
 		else w = 0;
 		Mtr1.move();
-		Sleep(300);
+		Sleep(100);
+		if (Mtr1.isStation() == 1) {
+			Mtr1.inorout();
+		}
 	}
 }
 
