@@ -14,6 +14,18 @@ public: void move() {
 }
 public: int is_it_train(int x, int y) {
 	int dsa = head_x - length_of_train;
+	int hgt;
+	for (int iy = 0; iy <= station; iy++) {
+		hgt = stations[iy] - length_of_train;
+		if (x <= stations[iy] && x >= hgt) {
+			if (y == (path - 1)) {
+				return 2;
+			}
+		}
+		else {
+			int dkhfs = 1;
+		}
+	}
 	if (x < head_x && x>dsa) {
 		if (y == path) {
 			return 1;

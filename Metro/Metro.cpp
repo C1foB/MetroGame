@@ -16,8 +16,9 @@ int main()
 	setlocale(LC_ALL,"Russian");
 	int w;
 	Metro Mtr1;
-	cout << "Enter nuber of stations" << endl;
+	cout << "Введите количество станций" << endl;
 	cin >> Mtr1.station;
+	Mtr1.station = Mtr1.station - 1;
 	for (int g = 0; g <= Mtr1.station; g++) {
 		cout << "Введите позицию станции номер" << g << endl;
 		cin >> Mtr1.stations[g];
@@ -44,6 +45,9 @@ int main()
 				else if (trfl != 1 && cmdy == Mtr1.path) {
 					cout << "=";
 				}
+				else if (trfl == 2) {
+					cout << "H";
+				}
 				else { cout << " ";}
 			}
 			cout << endl;
@@ -67,7 +71,7 @@ int main()
 		else w = 0;
 		Mtr1.move();
 		Sleep(100);
-		if (Mtr1.isStation() == 1) {
+		if (Mtr1.isStation() == 1&&GetKeyState('O')) {
 			Mtr1.inorout();
 		}
 	}
