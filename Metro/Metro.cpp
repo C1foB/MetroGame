@@ -2,57 +2,89 @@
 //
 
 #include <iostream>
-using namespace std;
+
 #include "Metro.h"
 #include <thread>
 #include <chrono>
 #include <Windows.h>
+using namespace std;
 
-const int consolex = 120;
-const int consoley = 28;
+
+
+void clrscr()
+{
+	std::cout << "\033[2J";     // очистка экрана
+	std::cout << "\033[0;0f";   // перемещение курсора в верхний левый угол
+}
+
+int consolex = 120;
+int consoley = 28;
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 int main()
 {
 	setlocale(LC_ALL,"Russian");
 	int w;
 	Metro Mtr1;
-	cout << "Введите количество станций" << endl;
+	std::cout << "Введите количество станций " << endl;
 	cin >> Mtr1.station;
 	Mtr1.station = Mtr1.station - 1;
 	for (int g = 0; g <= Mtr1.station; g++) {
-		cout << "Введите позицию станции номер" << g << endl;
+		std::cout << "Введите позицию станции номер " << g << endl;
 		cin >> Mtr1.stations[g];
 	}
 	Mtr1.speed = 1;
 	Mtr1.head_x = 8;
-	cout << "Enter the length of train >>";
+	std::cout << "Введите количество вагонов ";
 	cin >> Mtr1.length_of_train;
 	Mtr1.length_of_train += 1;
-	cout << "Enter number of the path for train>>";
+	std::cout << "Введите номер пути поезда метро ";
 	cin >> Mtr1.path;
 	Mtr1.path -= 1;
+	consoley = Mtr1.path + 1;
+	std::cout << "Введите сложность(1 - 20) ";
+	bool is_initialistet;
+	is_initialistet = 0;
 	system("cls");
-	Mtr1.people = 104;
-	while(true){
+	Mtr1.people = 999;
+	bool ih;
+	ih = false;
+	int LiveTick = 0;
+	while(ih != true){
 		system("cls");
-		cout << Mtr1.people << " чел." << endl;
+		std::cout << Mtr1.people << " чел." << endl;
 		for (int cmdy = 0; cmdy < consoley; cmdy++) {
 			for (int cmdx = 0; cmdx < consolex; cmdx++) {
 				int trfl = Mtr1.is_it_train(cmdx, cmdy);
 				if (trfl == 1) {
-					cout << "@";
+					SetConsoleTextAttribute(hConsole, 159);
+					std::cout << "=";
+					SetConsoleTextAttribute(hConsole, 15);
 				}
 				else if (trfl != 1 && cmdy == Mtr1.path) {
-					cout << "=";
+					SetConsoleTextAttribute(hConsole, 135);
+					std::cout << "-";
+					SetConsoleTextAttribute(hConsole, 15);
 				}
 				else if (trfl == 2) {
-					cout << "H";
+					SetConsoleTextAttribute(hConsole, 176);
+					std::cout << "H";
+					SetConsoleTextAttribute(hConsole, 15);
 				}
-				else { cout << " ";}
+				else if (trfl == 200) {
+					SetConsoleTextAttribute(hConsole, 255);
+					std::cout << "#";
+					SetConsoleTextAttribute(hConsole, 15);
+				}
+				else { 
+					SetConsoleTextAttribute(hConsole, 132);
+					std::cout << " ";
+					SetConsoleTextAttribute(hConsole, 15);
+				}
 			}
-			cout << endl;
+			std::cout << endl;
 		}
-		
 		
 		
 		if (GetKeyState('S')) {
@@ -74,7 +106,13 @@ int main()
 		if (Mtr1.isStation() == 1&&GetKeyState('O')) {
 			Mtr1.inorout();
 		}
+		LiveTick++;
+		if (LiveTick == 150) {
+			ih = true;
+		}
 	}
+	system("cls");
+	cout << "Вы выйграли: " << 999 - Mtr1.people<<"!!!";
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
